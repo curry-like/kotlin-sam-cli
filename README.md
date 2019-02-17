@@ -10,12 +10,14 @@ This is a sample template for kotlin-sam-test - Below is a brief explanation of 
 │   ├── main
 │   │   └── kotlin
 │   │       └── helloworld                  <-- Source code for a lambda function
-│   │           ├── App.kt                  <-- Lambda function code
+│   │           ├── GetApp.kt               <-- Lambda function code
+│   │           └── PostApp.kt              <-- Lambda function code
 │   │           └── GatewayResponse.kt      <-- POJO for API Gateway Responses object
 │   └── test                                <-- Unit tests
 │       └── kotlin
 │           └── helloworld
-│               └── AppTest.kt
+│               └── PostAppTest.kt
+│               └── GetAppTest.kt
 └── template.yaml
 ```
 

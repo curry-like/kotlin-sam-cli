@@ -1,21 +1,20 @@
 package helloworld
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.IOException
-import java.net.URL
-import java.util.HashMap
-import java.util.stream.Collectors
-
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.URL
+import java.util.*
+import java.util.stream.Collectors
 
 /**
  * Handler for requests to Lambda function.
  */
-class App : RequestHandler<Any, Any> {
+class GetApp : RequestHandler<Any, GatewayResponse> {
 
-    override fun handleRequest(input: Any?, context: Context?): Any {
+    override fun handleRequest(input: Any?, context: Context?): GatewayResponse {
         val headers = HashMap<String, String>()
         headers["Content-Type"] = "application/json"
         headers["X-Custom-Header"] = "application/json"

@@ -13,11 +13,11 @@ Globals:
 
 Resources:
 
-    HelloWorldFunction:
+    HelloWorldGetFunction:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
             CodeUri: target/HelloWorld-1.0.jar
-            Handler: helloworld.App::handleRequest
+            Handler: helloworld.GetApp::handleRequest
             Runtime: java8
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
@@ -29,16 +29,32 @@ Resources:
                         Path: /hello
                         Method: get
 
+    HelloWorldPostFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: target/HelloWorld-1.0.jar
+        Handler: helloworld.PostApp::handleRequest
+        Runtime: java8
+        Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+          Variables:
+            PARAM1: VALUE
+        Events:
+          HelloWorld:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /hello
+              Method: post
+
 Outputs:
 
     HelloWorldApi:
       Description: "API Gateway endpoint URL for Prod stage for Hello World function"
       Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
 
-    HelloWorldFunction:
-      Description: "Hello World Lambda Function ARN"
-      Value: !GetAtt HelloWorldFunction.Arn
+    HelloWorldGetFunction:
+      Description: "Hello World GET Lambda Function ARN"
+      Value: !GetAtt HelloWorldGetFunction.Arn
 
-    HelloWorldFunctionIamRole:
-      Description: "Implicit IAM Role created for Hello World function"
-      Value: !GetAtt HelloWorldFunctionRole.Arn
+    HelloWorldPostFunction:
+      Description: "Hello World POST Lambda Function ARN"
+      Value: !GetAtt HelloWorldPostFunction.Arn
